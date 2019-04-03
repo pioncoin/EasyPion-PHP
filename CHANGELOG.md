@@ -1,13 +1,12 @@
-# Changelog for EasyDash-PHP
-By Alexandre (aka elbereth) Devilliers
-https://github.com/elbereth/EasyDash-PHP
+# Changelog for EasyPion-PHP
+By Pioncore
+https://github.com/pioncoin/EasyPion-PHP
 
-Tips appreciated: Xbon36F261wXDL4p1CEZAX28t8U4ayR9uu
 
 
 ## 1.1.0 
 
-* Renamed to EasyDash-PHP
+* Renamed to EasyPion-PHP
 
 ## 1.0.0
 

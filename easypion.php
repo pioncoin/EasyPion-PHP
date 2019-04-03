@@ -1,16 +1,16 @@
 <?php
 /*
-EasyDash-PHP
+EasyPion-PHP
 
-A simple class for making calls to Dash's API using PHP.
-https://github.com/elbereth/EasyDash-PHP
+A simple class for making calls to Pion's API using PHP.
+https://github.com/pioncoin/EasyPion-PHP
 
-Tips appreciated: Xbon36F261wXDL4p1CEZAX28t8U4ayR9uu
 
 ====================
 
 The MIT License (MIT)
 
+Copyright (c) 2019 The pioncore developers
 Copyright (c) 2014 Alexandre Devilliers
 Copyright (c) 2013 Andrew LeCody
 
@@ -34,41 +34,41 @@ THE SOFTWARE.
 
 ====================
 
-// Initialize Dash connection/object
-$dash = new \elbereth\EasyDash('username','password');
+// Initialize Pion connection/object
+$pion = new \pioncoin\EasyPion('username','password');
 
 // Optionally, you can specify a host and port.
-$dash = new \elbereth\EasyDash('username','password','host','port');
+$pion = new \pioncoin\EasyPion('username','password','host','port');
 // Defaults are:
 //	host = localhost
-//	port = 9998
+//	port = 9953
 //	proto = http
 
 // If you wish to make an SSL connection you can set an optional CA certificate or leave blank
 // This will set the protocol to HTTPS and some CURL flags
-$dash->setSSL('/full/path/to/mycertificate.cert');
+$pion->setSSL('/full/path/to/mycertificate.cert');
 
-// Make calls to dashd as methods for your object. Responses are returned as an array.
+// Make calls to piond as methods for your object. Responses are returned as an array.
 // Examples:
-$dash->getinfo();
-$dash->getrawtransaction('0e3e2357e806b6cdb1f70b54c3a3a17b6714ee1f0e68bebb44a74b1efd512098',1);
-$dash->getblock('000000000019d6689c085ae165831e934ff763ae46a2a6c172b3f1b60a8ce26f');
+$pion->getinfo();
+$pion->getrawtransaction('0e3e2357e806b6cdb1f70b54c3a3a17b6714ee1f0e68bebb44a74b1efd512098',1);
+$pion->getblock('000000000019d6689c085ae165831e934ff763ae46a2a6c172b3f1b60a8ce26f');
 
 // The full response (not usually needed) is stored in $this->response while the raw JSON is stored in $this->raw_response
 
 // When a call fails for any reason, it will return FALSE and put the error message in $this->error
 // Example:
-echo $dash->error;
+echo $pion->error;
 
 // The HTTP status code can be found in $this->status and will either be a valid HTTP status code or will be 0 if cURL was unable to connect.
 // Example:
-echo $dash->status;
+echo $pion->status;
 
 */
 
-namespace elbereth;
+namespace pioncoin;
 
-class EasyDash {
+class EasyPion {
     // Configuration options
     private $username;
     private $password;
@@ -94,7 +94,7 @@ class EasyDash {
      * @param string $proto
      * @param string $url
      */
-    function __construct($username, $password, $host = 'localhost', $port = 9998, $url = null) {
+    function __construct($username, $password, $host = 'localhost', $port = 9953, $url = null) {
         $this->username      = $username;
         $this->password      = $password;
         $this->host          = $host;
@@ -177,11 +177,11 @@ class EasyDash {
         }
 
         if ($this->response['error']) {
-            // If dashd returned an error, put that in $this->error
+            // If piond returned an error, put that in $this->error
             $this->error = $this->response['error']['message'];
         }
         elseif ($this->status != 200) {
-            // If dashd didn't return a nice error message, we need to make our own
+            // If piond didn't return a nice error message, we need to make our own
             switch ($this->status) {
                 case 400:
                     $this->error = 'HTTP_BAD_REQUEST';
